@@ -11,6 +11,7 @@ gevent
 gunicorn
 psycopg2-binary
 whitenoise
+django-click
 
 # Logging
 django-tracer
@@ -39,6 +40,7 @@ pip-tools>=6.6.2
 # Markdown and Frontmatter
 mistletoe
 python-frontmatter
+markdownify
 
 #Forum
 django-machina

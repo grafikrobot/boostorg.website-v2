@@ -20,6 +20,8 @@ attrs==21.1.0
     # via pytest
 backcall==0.2.0
     # via ipython
+beautifulsoup4==4.11.1
+    # via markdownify
 billiard==3.6.4.0
     # via celery
 black==21.5b0
@@ -43,6 +45,7 @@ click==7.1.2
     #   click-didyoumean
     #   click-plugins
     #   click-repl
+    #   django-click
     #   pip-tools
 click-didyoumean==0.0.3
     # via celery
@@ -74,6 +77,8 @@ django-bakery==0.12.7
     # via -r ./requirements.in
 django-cache-url==3.2.3
     # via environs
+django-click==2.3.0
+    # via -r ./requirements.in
 django-db-geventpool==4.0.0
     # via -r ./requirements.in
 django-extensions==3.1.3
@@ -132,6 +137,8 @@ kombu==5.0.2
     # via celery
 markdown2==2.4.1
     # via django-machina
+markdownify==0.11.2
+    # via -r ./requirements.in
 marshmallow==3.11.1
     # via environs
 matplotlib-inline==0.1.3
@@ -227,7 +234,10 @@ six==1.16.0
     #   django-bakery
     #   django-rest-auth
     #   fs
+    #   markdownify
     #   python-dateutil
+soupsieve==2.3.2.post1
+    # via beautifulsoup4
 sqlparse==0.4.1
     # via django
 stack-data==0.2.0
