@@ -35,6 +35,7 @@ class Entry(models.Model):
     class AlreadyApprovedError(Exception):
         """The entry cannot be approved again."""
 
+    news_type = "news"
     slug = models.SlugField()
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, default="")
@@ -56,7 +57,8 @@ class Entry(models.Model):
     objects = EntryManager()
 
     class Meta:
-        verbose_name_plural = "Entries"
+        verbose_name = "News"
+        verbose_name_plural = "News"
 
     def __str__(self):
         # avoid printing author information that cause extra queries
@@ -143,21 +145,22 @@ class Entry(models.Model):
 
 
 class BlogPost(Entry):
+    news_type = "blogpost"
     abstract = models.CharField(max_length=256)
     # Possible extra fields: RSS feed? banner? keywords? tags?
 
 
 class Link(Entry):
-    pass
+    news_type = "link"
 
 
 class Video(Entry):
-    pass
+    news_type = "video"
     # Possible extra fields: length? quality?
 
 
 class Poll(Entry):
-    pass
+    news_type = "poll"
     # Possible extra fields: voting expiration date?
 
 
@@ -166,3 +169,6 @@ class PollChoice(models.Model):
     wording = models.CharField(max_length=200)
     order = models.PositiveIntegerField()
     votes = models.ManyToManyField(User)
+
+
+NEWS_MODELS = [Entry, BlogPost, Link, Poll, Video]

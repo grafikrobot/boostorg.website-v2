@@ -9,13 +9,9 @@ from django.utils.text import slugify
 from django.utils.timezone import now
 from model_bakery import baker
 
-
 from ..forms import BlogPostForm, EntryForm, LinkForm, PollForm, VideoForm
-from ..models import BlogPost, Entry, Link, Poll, Video
+from ..models import NEWS_MODELS, BlogPost, Entry, Link, Poll, Video
 from ..notifications import send_email_after_approval, send_email_news_needs_moderation
-
-
-NEWS_MODELS = [Entry, BlogPost, Link, Poll, Video]
 
 
 @pytest.mark.parametrize(
