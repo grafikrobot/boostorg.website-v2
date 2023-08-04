@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 
 from allauth.account.forms import ChangePasswordForm
+from allauth.account.views import SignupView
 from allauth.socialaccount.models import SocialAccount
 
 from rest_framework import generics
@@ -233,3 +234,12 @@ class NewCurrentUserProfileView(LoginRequiredMixin, SuccessMessageMixin, Templat
         else:
             for error in form.errors.values():
                 messages.error(request, f"{error}")
+
+
+class CustomSignupView(SignupView):
+    def form_invalid(self, form):
+        # Add form's non-field errors to Django's messages framework
+        print("got a signup form error")
+        for error in form.non_field_errors():
+            messages.error(self.request, error)
+        return super().form_invalid(form)

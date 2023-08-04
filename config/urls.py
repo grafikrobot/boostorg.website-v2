@@ -59,6 +59,7 @@ from users.views import (
     ProfilePreferencesView,
     ProfileView,
     UserViewSet,
+    CustomSignupView,
 )
 from versions.api import VersionViewSet
 from versions.views import VersionCurrentReleaseDetail, VersionDetail
@@ -75,6 +76,7 @@ urlpatterns = (
         path("", HomepageView.as_view(), name="home"),
         path("homepage-beta/", HomepageBetaView.as_view(), name="home-beta"),
         path("admin/", admin.site.urls),
+        path("accounts/signup/", CustomSignupView.as_view(), name="account_signup"),
         path("accounts/", include("allauth.urls")),
         path(
             "users/me/update-github-photo/",
