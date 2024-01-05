@@ -1,5 +1,6 @@
 from django import template
 from django.template.defaultfilters import stringfilter
+import re
 
 register = template.Library()
 
@@ -15,6 +16,30 @@ def truncate_middle(value, arg):
         return value
     else:
         return f"{value[:ln//2]}....{value[-((ln+1)//2):]}"
+
+
+@register.filter(is_safe=True)
+@stringfilter
+def multi_truncate_middle(value, arg):
+    def replace_match(match):
+        word = match.group(0)
+        if len(word) > ln:
+            start = word[: ln // 2]  # Take the first 7 characters
+            end = word[-((ln + 1) // 2) :]  # Take the last 7 characters
+            return f"{start}...{end}"
+        return word
+
+    pattern = re.compile(r"\b\w+\b")
+
+    try:
+        ln = int(arg)
+    except ValueError:
+        return value
+    if len(value) <= ln:
+        return value
+    else:
+        result = pattern.sub(replace_match, value)
+        return result
 
 
 @register.filter(is_safe=True)
